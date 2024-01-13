@@ -35,4 +35,3 @@ def creates_instance():
                                          item["description"], item["from"], item["to"])])
 
     return instance
-
