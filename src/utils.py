@@ -1,6 +1,7 @@
 import os
 import json
 from class_file import Transactiondata
+import operator
 
 
 def displays_list():
@@ -14,24 +15,29 @@ def displays_list():
 
 
 def filter_list():
-    """Фильтрует лист по результату операции EXECUT и выдает список последних 5-ти операций"""
+    """Фильтрует лист по результату операции EXECUTED,
+    выдает отсортированный список последних 5-ти операций
+    ввиде кортежа"""
     operations_list = list()
-    keys = ("id", "date_", "state", "operationAmount", "description", "from", "to")
     for item in displays_list():
-        if set(keys).issubset(item):
+        if item == {}:
+            continue
+        elif item["state"] == "EXECUTED":
             operations_list.append(item)
     del operations_list[0:len(operations_list) - 5]
 
-    return operations_list
+    return sorted(operations_list, key=operator.itemgetter('date'), reverse=True)
 
-
-#  print(filter_list()
 
 def creates_instance():
     """Создает экземпляры - 5 шт"""
-    instance = list()
+    instance_file = list()
     for item in filter_list():
-        instance.append([Transactiondata(item["id"], item["date_"], item["state"], item["operationAmount"],
-                                         item["description"], item["from"], item["to"])])
+        if "from" in item:
+            instance_file.append(Transactiondata(item["id"], item["date"], item["state"], item["operationAmount"],
+                                                 item["description"], item["to"], item["from"]))
+        else:
+            instance_file.append(Transactiondata(item["id"], item["date"], item["state"], item["operationAmount"],
+                                                 item["description"], item["to"]))
 
-    return instance
+    return instance_file
