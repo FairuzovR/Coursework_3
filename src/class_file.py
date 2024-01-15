@@ -88,19 +88,3 @@ class Transactiondata:
     def displays_currency(self):
         """Выводит валюту операции"""
         return self.operationamount["currency"]["name"]
-
-
-# a = Transactiondata('736942989', "2019-09-06T00:48:01.081967", 'EXECUTED', {
-#     "amount": "6357.56",
-#     "currency": {
-#         "name": "USD",
-#         "code": "USD"
-#     }
-# }, "Перевод организации", "Visa Gold 3654412434951162", "Счет 59986621134048778289")
-
-# a.data_operation()
-# a.status_description()
-# a.sent_from()
-# a.sent_to()
-# a.displays_amount()
-# a.displays_currency()

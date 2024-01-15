@@ -1,13 +1,13 @@
 import os
 import json
+from config import root_path
 from class_file import Transactiondata
 import operator
 
 
 def displays_list():
     """открывает файл с данными и выводит список операций"""
-    root_path = os.path.dirname(__file__)
-    with open(os.path.join(root_path, '../operations.json')) as file:
+    with open(os.path.join(root_path, 'operations.json')) as file:
         raw_json = file.read()
         operations_file = json.loads(raw_json)
 
